@@ -85,7 +85,7 @@ Otherwise, \(\alpha\) is a \emph{limit ordinal}.
   Define
   \begin{align*}
     F^0(x)&\define x \\
-    F^{\successor(n)}(x)&\define f(F^n(x))
+    F^{\successor(n)}(x)&\define F(F^n(x))
     \shortintertext{If \(\alpha\) is a limit ordinal,}
     F^{\alpha}(x) &\define \sup_{\beta < \alpha} F^\beta(x)
   \end{align*}
@@ -218,7 +218,7 @@ allowing arbitrary \(\sigma\)--unions and intersections.
   Suppose \(A_i\) is a countable sequence of sets in \(\system\). Then let
   \begin{align*}
     B_1 &= A_1 \\
-    B_n &= A_n \setminus \bigcup_{i<n}A_{i} \\
+    B_n &= A_n \setminus \bigdisjunion_{i<n}B_{i} \\
     \shortintertext{so \(B_i\) are pairwise-disjoint and}
     \bigcup A_n &= \bigdisjunion B_n \in \system
   \end{align*}
