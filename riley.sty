@@ -1,0 +1,142 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{riley}
+\frenchspacing
+\RequirePackage{amsmath, amssymb, url, microtype,xcolor}
+\usepackage{mathtools}
+
+\usepackage{mathdots}
+\usepackage[amsmath,thmmarks]{ntheorem}
+\usepackage{thmtools}%for nameref to work right
+\usepackage{nameref}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+\usepackage[nameinlink]{cleveref}
+\renewcommand{\ref}{\hyperref}
+\renewcommand{\namecref}[1]{\cref{#1}~(\nameref{#1})}
+
+
+
+% koma
+\setkomafont{section}{\LARGE\normalfont\sffamily\bfseries\color[gray]{.46}}
+\setkomafont{subsection}{\large\normalfont\sffamily\bfseries\color[gray]{.35}}
+\setkomafont{subsubsection}{\big\normalfont\sffamily\bfseries\color[gray]{.3}}
+
+% theorem stuff
+\newcounter{thms}
+
+% \usepackage{lettrine}
+
+% \definecolor{numbercolor}{gray}{.7}
+% \newcommand{\numfont}[1]{{\transparent{.2}\normalfont\color{numbercolor}{\lettrine[lhang=2,lines=4,lraise=.5,loversize=.2]{\smash{#1}}{}}}}
+
+
+
+
+% \makeatletter
+% \newtheoremstyle{dropmargin}%
+% {\item[\numfont{##2} \theorem@headerfont ##1\ ##2\theorem@separator]}%
+% {\item[\numfont{##2} \theorem@headerfont ##1\ ##2\ (##3)\theorem@separator]}
+% \makeatother
+
+% \DeclareOption{dropmargin}{
+% \theoremstyle{dropmargin}
+% }
+% \ProcessOptions\relax
+
+\theoremheaderfont{\normalfont\sffamily}
+\newtheorem{defn}[thms]{Definition}
+\newtheorem{defn?}[thms]{Definition attempt}
+\newtheorem{defcat}[thms]{Category definition}
+\newtheorem{example}[thms]{Example}
+
+\newtheorem{counterex}[thms]{Counter example}
+
+\newtheorem{theorem}[thms]{Theorem}
+\newtheorem{lemma}[thms]{Lemma}
+\newtheorem{cor}[thms]{Corollary}
+\newtheorem{note}[thms]{Note}
+
+% proof environment
+\makeatletter
+\newcommand{\openbox}{\leavevmode
+  \hbox to.77778em{%
+  \hfil\vrule
+  \vbox to.675em{\hrule width.6em\vfil\hrule}%
+  \vrule\hfil}}
+\gdef\proofSymbol{\openbox}
+\newcommand{\proofname}{Proof.}
+\newcounter{proof}\newcounter{currproofctr}\newcounter{endproofctr}%
+\newenvironment{proof}[1][\proofname]{
+  \th@nonumberplain
+  \def\theorem@headerfont{\sffamily}%
+  \normalfont
+  \theoremsymbol{\ensuremath{_\blacksquare}}
+  \@thm{proof}{proof}{#1}}%
+  {\@endtheorem}
+\makeatother
+
+
+
+\newcommand{\ie}{\emph{i.e.\@}}
+\newcommand{\eg}{\emph{e.g.\@}}
+
+
+%variable names
+\newcommand{\norm}[1]{\left\|#1 \right\|}
+\newcommand{\inner}[2]{\left\langle #1, #2 \right\rangle}
+\providecommand{\blank}{{\Box}}%{\,\rule{1em}{.4pt}\,}
+\providecommand{\Z}{\mathbb{Z}}
+\providecommand{\N}{\mathbb{N}}
+\providecommand{\R}{\mathbb{R}}
+\providecommand{\C}{\mathbb{C}}
+\providecommand{\Q}{\mathbb{Q}}
+\providecommand{\id}{\mathrm{id}}
+
+\DeclareMathOperator*{\Span}{span}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\so}{SO}
+\DeclareMathOperator{\fso}{\mathfrak{so}}
+\DeclareMathOperator{\sgn}{sgn}
+\newcommand{\cl}{\overline}
+\DeclareMathOperator{\st}{st}
+\providecommand{\define}{\coloneqq}
+
+
+\renewcommand{\emptyset}{\varnothing}
+
+
+\DeclareMathOperator{\supp}{supp}
+\newcommand{\interior}[1]{{\kern0pt#1}^{\mathrm{o}}}
+
+%light bullets
+\let\oldlabelitemi\labelitemi
+\renewcommand{\labelitemi}{\color[gray]{.3}\oldlabelitemi}
+
+\usepackage{cancel}
+\definecolor{cancel-default}{gray}{.5}
+\newcommand\Ccancel[2][cancel-default]{\renewcommand\CancelColor{\color{#1}}\cancel{#2}}
+\newcommand{\withcolor}[2][gray]{\colorlet{saved}{.}\color{#1}#2\color{saved}}
+\newcommand{\grayunderbrace}[3][gray]{\colorlet{saved}{.}\color{#1}\underbrace{\color{saved}#2}_{\color{saved}#3}\color{saved}}
+\newcommand{\grayoverbrace}[3][gray]{\colorlet{saved}{.}\color{#1}\overbrace{{\color{saved}#2}}^{{\color{saved}#3}}\color{saved}}
+
+\newcommand{\der}{\mathop{}\!d}
+
+\newcommand{\ee}{{E}}
+\newcommand{\pp}{\mathcal{P}}
+\DeclareMathOperator{\diam}{diam}
+
+\usepackage{bbm}
+\newcommand{\character}{{\mathbbm{1}}}
+\usepackage{xfrac}
+\newcommand{\integrable}{\mathcal{L}}
+
+\let\blackprod\prod
+\let\blackcoprod\coprod
+\let\blacksum\sum
+\definecolor{\sum-color}{gray}{0}
+\definecolor{product-color}{gray}{.25}
+\DeclareMathOperator*{\graysum}{{\color{sum-color}\blacksum}}
+\DeclareMathOperator*{\grayprod}{{\color{product-color}\blackprod}}
+\DeclareMathOperator*{\graycoprod}{{\color{product-color}\blackcoprod}}
+\renewcommand{\sum}{\graysum}
+\renewcommand{\prod}{\grayprod}
+\renewcommand{\coprod}{\graycoprod}

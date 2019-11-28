@@ -1,0 +1,309 @@
+\documentclass{scrartcl}
+
+\usepackage{riley}
+\usepackage{cfr-lm}
+%\usepackage{riley-libertine}
+\usepackage{graphicx}
+
+\newcommand{\measpace}{\Omega}
+\newcommand{\system}{\mathcal D}
+\newcommand{\propersetminus}{\begin{smallmatrix} \setminus\\\supseteq \end{smallmatrix}}%{\mathop{\setminus}\limits_{\supseteq}}
+\DeclareMathOperator*{\bigdisjunion}{\coprod}
+\newcommand{\disjunion}{\amalg}
+\newcommand{\ordinals}{\texttt{Ord}}
+\newcommand{\inclass}{\in}
+\newcommand{\notinclass}{\notin}
+
+\DeclareMathOperator*{\upunion}{\bigcup\!\!\Uparrow\!}
+\DeclareMathOperator{\successor}{succ}
+
+\usepackage{import}
+\newcommand{\figinput}[1]{\input{#1}}%{\import{figs/}{#1}}
+
+\begin{document}
+
+\section{Ordinals and transifite induction}
+\newcommand{\setofords}{\mathcal X}
+\begin{defn}[The ordinals, \(\ordinals\)]
+  These are defined inductively:
+  \begin{itemize}
+  \item \(0\define\emptyset \inclass \ordinals\)
+  \item If \(n\inclass\ordinals\) then
+    \[
+      \successor(n)\define n \cup \{n\} \inclass \ordinals
+    \]
+  \item If \(\setofords \subseteq \ordinals\) is a set, then
+    \[
+      \sup \setofords \define \bigcup\setofords \inclass \ordinals
+    \]
+  \end{itemize}
+  In other words, an ordinal is the set of all smaller ordinals.
+In particular, the last definition precludes the ordinals from being a set.
+\(\ordinals\) is bigger than any set. They form a class.
+
+If \(\alpha = \successor(n)\) then \(\alpha\) is a \emph{successor ordinal}.
+Otherwise, \(\alpha\) is a \emph{limit ordinal}.
+\end{defn}
+\begin{theorem}[\(\ordinals\) is well-ordered]\label{ordinals are well ordered}
+  Every nonempty class of ordinals contains a least element.
+\end{theorem}
+\begin{proof}
+  Let \(\setofords\) be a nonempty class of ordinals. Then it suffices to show
+  \[
+   I\define\inf\setofords = \bigcap \setofords \in\setofords
+  \]
+  Suppose \(I\notin\setofords\). Then for any \(x\in\setofords\), \(I<x\).
+  Consequently, for any \(x\in\setofords\), \(\successor(I)\leq x\). But then
+  \(\successor(I)=I\), a contradiction.
+\end{proof}
+
+\begin{theorem}[Transfinite induction]
+  For a logical statement \(\phi\), if
+  \begin{enumerate}
+  \item \(\phi(0)\) holds,
+  \item \(\phi(n)\implies\phi(\successor(n))\) (strictly speaking, this follows
+    from (3) but is usually easier to prove first)
+  \item \label{strong induction}If, for all \(n<\alpha\), \(\phi(n)\) is true then \(\phi(\alpha)\) is true:
+    \[
+      (\forall n<\alpha) \phi(n)\implies \phi(\alpha)
+    \]
+  \end{enumerate}
+  Then \(\phi\) holds for all ordinals.
+\end{theorem}
+\begin{proof}
+  \newcommand{\badset}{\setofords}
+  Let \(\badset\) be the class where \(\phi\) does not hold. Suppose
+  \(\badset\neq\emptyset\). Then let for all ordinals \(n< \inf\badset\),
+  \(\phi(n)\) by hypothesis. Hence, by (3), \(\phi(\inf\badset)\) holds. But then
+  \(\inf\badset\notin\badset\), contradicting \namecref{ordinals are well ordered}.
+  Therefore, \(\badset\) is empty.
+\end{proof}
+
+\begin{theorem}[\(\ordinals\) fixed point theorem] \label{ordinal fixed point theorem}
+  Let \((X,\leq)\) be a complete ordered space.
+  Suppose \(F:X\to X\) is nondecreasing.
+  Define
+  \begin{align*}
+    F^0(x)&\define x \\
+    F^{\successor(n)}(x)&\define f(F^n(x))
+    \shortintertext{If \(\alpha\) is a limit ordinal,}
+    F^{\alpha}(x) &\define \sup_{\beta < \alpha} F^\beta(x)
+  \end{align*}
+  Then for any \(x\in X\), \(F^\alpha(x)\)  is eventually the smallest fixed
+  point of \(F\) greater than or equal to \(x\).
+\end{theorem}
+\begin{proof}
+  Fix \(x\). Then \(F^\blank(x):\ordinals\to X\) is nondecreasing by
+  construction. Because \(\ordinals\) is bigger than any set, \(F^\blank(x)\)
+  cannot be injective. Hence there is some smallest \(\alpha\inclass\ordinals\)
+  such that \(F^\alpha(x)=F^{\gamma}(x)\) with \(\gamma > \alpha\). But
+  \(\alpha<\successor(\alpha)\leq\beta\), so by monotonicity,
+  \[
+    F^{\alpha}(x)\leq F^{\successor(\alpha)}(x) \leq F^{\beta}(x)=F^{\alpha}(x)
+  \]
+  hence
+  \[
+    F(F^\alpha(x)) = F^{\successor(\alpha)}(x)=F^{\alpha}(x)
+  \]
+  so \(F\) fixes \(F^{\alpha}(x)\).
+
+  Suppose \(y\) is a fixed point and \(x\leq y\leq F^\alpha(x)\). Then there is
+  some smallest \(\beta\) such that \(y\leq F^\beta(x)\):
+  \begin{itemize}
+  \item If \(\beta=\successor(\gamma)\), then
+    \[
+      F^\gamma(x) \leq y \leq f(F^\gamma(x)) = F^\beta(x)
+    \]
+    But by monotonicity, \(F(F^\gamma(x))\leq f(y) =y\) by assumption \(y\) is fixed.
+    Thus \(y=F^\gamma(x)\) for some \(\gamma\leq\alpha\).
+  \item If \(\beta\) is a limit ordinal, then  for all \(\gamma <\beta\),
+    \[
+      F^\gamma(x) \leq y \leq F^\beta(x)=\sup_{\hat\gamma < \beta} F^{\hat\gamma}(x) = y
+    \]
+    so \(F^{\beta}(x)=y\).
+  \end{itemize}
+\end{proof}
+By characterizing \(\sigma\)-algebras and \(\lambda\)-systems as fixed points of
+set functions, this result becomes a powerful tool for proving results about
+generated \(\sigma\)-algebras and \(\lambda\)-systems.
+\section{\(\pi\)--\(\lambda\) systems and theorem}
+Special notation:
+\begin{itemize}
+\item I'll use \(\disjunion\) to represent \emph{disjoint} unions,
+\item  \(\upunion\) to
+  represent \emph{increasing} unions,
+\item and \(\propersetminus\) to represent
+  \emph{proper} relative complements: \(A\setminus B\) when \(B\subseteq A\).
+\end{itemize}
+\begin{defn}[\(\lambda\)-system aka Dynkin system] \label{original dynkin system def}
+  \(\system\) is a Dynkin system on \(\measpace\) iff
+  \begin{itemize}
+  \item \(\measpace\in\system\)
+  \item Closure under \emph{proper} relative complements:
+    \[
+      A\subseteq B \implies B\propersetminus A \in \system
+    \]
+  \item  Closure under \emph{increasing} \(\sigma\)-unions:
+    \[
+      A_1\subseteq A_2 \subseteq \dots \in \system \implies \upunion A_n \in \system
+    \]
+  \end{itemize}
+\end{defn}
+Allowing arbitrary complements would give a \(\sigma\)-algebra as
+\[
+  (\measpace\setminus A)\setminus B = (A\cup B)^C = A^C \cap B^C
+\]
+allowing arbitrary \(\sigma\)--unions and intersections.
+
+ \figinput{relcomp.pdf_tex}
+
+\begin{theorem}[Alternative definition of \(\lambda\)-system] \label{equivalent dynkin system def}
+  Equivalently,
+  \begin{itemize}
+  \item \(\measpace\in\system\)
+  \item Closure under \emph{global} complements: \[A\in \system \implies A^C\in\system\]
+  \item Closure under \emph{disjoint} \(\sigma\)-unions
+  \end{itemize}
+\end{theorem}
+\begin{proof}
+  Suppose \(\system\) meets the criteria of \namecref{equivalent dynkin system def}.
+ Then \(\system\) contains proper relative complements as \(A\propersetminus B =
+ (A^C\cup B)^C\): \\
+ \figinput{proper-comp-from-global-comp.pdf_tex}\\
+ But by taking proper relative complements, we can convert an ascending
+ \(\sigma\)-union into a disjoint \(\sigma\)-union: if \(A_n\uparrow A\), let
+ \begin{align*}
+   B_1 &= A_1 \in\system\\
+   B_n &= A_n\propersetminus \bigcup_{i<n}A_{i} \in\system\\
+         \shortintertext{Then \(\{B_n\}\) are pairwise-disjoint and}
+    A &= \upunion A_n =  \bigdisjunion_n B_n \in \system
+ \end{align*}
+ proving sufficiency.
+
+ For necessity, suppose \(\system\) satisfies the criteria of
+ \namecref{original dynkin system def}. As \(A^C =\measpace\setminus A\), a proper
+ complement, it suffices to show closure under disjoint unions. First, note that
+ it is closed under finite disjoint unions:
+ \[
+   A \disjunion B = ((\measpace\propersetminus A)\propersetminus B)^C \in \system
+ \]\\
+ \figinput{disjointbinunion-from-relcomp.pdf_tex}\\
+ because the complements are proper by disjointness.
+ Suppose \(B_i\)
+ are pairwise disjoint. Then \(B=\bigdisjunion B_i\in\system\) by hypothesis.
+ \begin{align*}
+   A_1 &= B_1 \in\system \\
+   A_n &= B_n\disjunion A_{n-1} \in \system
+         \shortintertext{therefore}
+   B&=\bigdisjunion B_n=\upunion A_n \in\system
+ \end{align*}
+\end{proof}
+\begin{defn}[\(\pi\)-system]
+  A \(\pi\)-system is closed under finite intersections.
+\end{defn}
+\begin{theorem}
+  If \(\system\) is a \(\pi\)-system and \(\lambda\)-system then it is a \(\sigma\)-algebra.
+\end{theorem}
+\begin{proof}
+  First, prove \(\system\) is an algebra.
+  Note that \(\system\) is closed under binary union as \(A\cup B = (A^C\cap
+  B^C)^C \) and \(A^C,B^C\in\system\) because \(\system\) is a \(\lambda\)-system, so
+  \(A^C\cap B^C\in\system\) because it is a \(\pi\)-system, and its complement is in
+  \(\system\) by closure under complements. In particular, \(\system\) must be
+  closed under \emph{arbitrary} relative complements as
+  \[
+    A\setminus B = A\propersetminus ({A\cap B})
+  \]
+
+  Suppose \(A_i\) is a countable sequence of sets in \(\system\). Then let
+  \begin{align*}
+    B_1 &= A_1 \\
+    B_n &= A_n \setminus \bigcup_{i<n}A_{i} \\
+    \shortintertext{so \(B_i\) are pairwise-disjoint and}
+    \bigcup A_n &= \bigdisjunion B_n \in \system
+  \end{align*}
+  proving closure under \(\sigma\)-unions.
+\end{proof}
+
+\newcommand{\lambdify}{\Lambda}
+\newcommand{\lambdagen}{\lambda}
+\newcommand{\pisystem}{P}
+\newcommand{\dsystem}{\system}
+\begin{theorem}[Dynkin's \(\pi\)--\(\lambda\) theorem]
+  If \(\pisystem\subseteq \dsystem\) where \(\pi\) is a \(\pi\)-system and \(\dsystem\) is a
+  \(\lambda\)-system, then
+  \[
+    \sigma(\pisystem) \subseteq \dsystem
+  \]
+\end{theorem}
+\begin{proof}
+  As \(\lambdagen(\pisystem)\) is the minimal \(\lambda\)-system containing
+  \(\pisystem\),
+  \[
+    \lambdagen(\pisystem)\subseteq\dsystem
+  \]
+  It suffices to show \(\lambdagen(\pisystem)\) is a
+  \(\pi\)-system because then it must be a \(\sigma\)-algebra.
+
+  Let \(U(X)\) indicate the set of disjoint \(\sigma\)-unions in \(X\):
+  \[
+    U(X)\define\left\{\bigdisjunion_{i\in \N} A_i: A_i\in X, A_i\cap A_j=\emptyset\right\}
+  \]
+  Let \(C(X)\) indicate the set of complements in \(X\):
+  \[
+    C(X)\define\left\{ A^C:A\in X \right\}
+  \]
+  And define
+  \[
+    \lambdify(X)\define X\cup U(X) \cup C(X) = U(X)\cup C(X) :
+    (2^{2^\measpace},\subseteq ) \to (2^{2^\measpace},\subseteq)
+  \]
+  By construction, \(\lambdify(X)=X\) iff \(X\) is a \(\lambda\)-system. By monotonicity
+  (\(X\subseteq\lambdify(X)\)), the minimum fixed point of \(\lambdify\) containing \(X\)
+  is the \(\lambda\)-system generated by \(X\). By \namecref{ordinal fixed point
+    theorem},
+  \newcommand{\stopord}{\omega}
+  \[
+    \lambdify^\stopord(\pisystem)=\lambda(\pisystem)
+  \]
+  for some \(\stopord\inclass\ordinals\).
+
+  We will show by induction that for any \(\alpha\in\ordinals\), the intersection of
+  any two elements in \(\lambdify^\alpha(\pisystem)\) is in
+  \(\lambdify^{3\alpha}(\pisystem)\).
+
+  \begin{enumerate}
+  \item This is trivially true for \(\alpha=0\) by the hypothesis that \(\pisystem\) is a \(\pi\)-system.
+  \item Any element in \(\lambdify^{\successor(\alpha)}(\pisystem)\) can be written as
+    \(A\), \(A^C\), or \(\bigdisjunion A_i\) with \(A,A_i\in\lambdify^{\alpha}\).
+    Consider writing an intersection of elements in
+    \(\lambdify^{\successor(\alpha)}\) in terms of proper complements and disjoint
+    unions of intersections of elements in \(\Lambda^\alpha(\pisystem)\):
+      \begin{align*}
+        &A\cap B^C &&= A\propersetminus \grayoverbrace{(B\cap A)}{\in \lambdify^{3\alpha}(\pisystem)} &&\in \lambdify^{3\alpha+1}(\pisystem) \\
+        &A^C\cap B^C &&= (A\cup B)^C = \left((A\cap B^C)\disjunion B  \right)^C &&\in \lambdify^{3\alpha+3}(\pisystem) \\
+        & \left(\bigdisjunion_{i} A_i\right) \cap
+        \left(\bigdisjunion_j B_j\right) &&= \bigdisjunion_{i,j}
+        \grayoverbrace{A_i\cap B_j}{\in\lambdify^{3\alpha}(\pisystem)} &&\in
+        \lambdify^{3\alpha+1}(\pisystem) \\
+       & A^C \cap \bigdisjunion B_j &&= \bigdisjunion \grayunderbrace{A^C\cap
+           B_j}{\in\lambdify^{3\alpha+1}(\pisystem)} &&\in\lambdify^{3\alpha+2}(\pisystem)
+      \end{align*}
+    which are all in \(\lambdify^{3\alpha+3}(\pisystem)=\lambdify^{3\successor(\alpha)}(\pisystem)\).
+  \item
+    If \(\alpha\) is a limit ordinal, then set
+    \[
+      3\alpha \geq 3\sup_{\beta <\alpha}\beta = \sup_{\beta <
+        \alpha}3\beta
+    \]
+    For any two \(A,B\in\lambdify^\alpha\) there must be some \(n_A,n_B<\alpha\)
+    such that \(A\in \lambdify^{n_A}(\pisystem)\) and
+    \(B\in\lambdify^{n_B}(\pisystem)\). Hence, if \(n=\max(n_A,n_B)\), then
+    \(A\cap B\in \lambdify^{3n}(\pisystem)\subseteq
+    \lambdify^{3\alpha}(\pisystem)\).
+  \end{enumerate}
+  But this process terminates at \(\omega\), hence
+  \(\lambdify^{3\omega}(\pisystem)=\lambdify^\omega(\pisystem)=\lambdagen(\pisystem)\)
+  and \(\lambdagen(\pisystem)\) is closed under intersections.
+\end{proof}
+\end{document}
