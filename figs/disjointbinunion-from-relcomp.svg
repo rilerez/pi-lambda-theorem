@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="65.725029mm"
+   height="44.027325mm"
+   viewBox="0 0 65.725029 44.027325"
+   version="1.1"
+   id="svg5905"
+   inkscape:version="0.92.4 5da689c313, 2019-01-14"
+   sodipodi:docname="disjointbinunion-from-relcomp.svg">
+  <defs
+     id="defs5899" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.7344937"
+     inkscape:cx="149.16042"
+     inkscape:cy="-17.911468"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:window-width="1920"
+     inkscape:window-height="1015"
+     inkscape:window-x="0"
+     inkscape:window-y="36"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata5902">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-14.969169,-11.003576)">
+    <rect
+       style="opacity:1;fill:#88b3b1;fill-opacity:1;stroke:#000000;stroke-width:0.19133912;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect6450"
+       width="65.533691"
+       height="43.835987"
+       x="15.064838"
+       y="11.099245" />
+    <path
+       style="fill:#a77baa;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.19103828px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 21.783419,27.069641 c 0,0 -3.524501,-4.405625 -0.220281,-5.837454 3.30422,-1.431828 8.26055,0.220282 8.921393,1.872391 0.660846,1.65211 4.075206,0.770984 4.956329,-0.330422 0.881127,-1.101407 6.4983,-5.286752 5.286754,-1.211548 -1.211547,4.075206 -2.092674,7.599708 -5.286754,7.819988 -3.194078,0.220281 -6.498299,-0.330422 -6.278016,2.202812 0.22028,2.533237 4.736047,3.854924 7.159143,2.643377 2.423094,-1.211546 8.590973,2.092672 5.507034,3.304221 -3.08394,1.211547 -6.167878,1.982532 -10.573505,2.753516 -4.405625,0.770985 -10.573504,3.5245 -9.802518,0.330422 0.770985,-3.19408 3.304219,-4.405628 2.423095,-7.159145 -0.881127,-2.753515 -2.092674,-6.388158 -2.092674,-6.388158 z"
+       id="path6462"
+       inkscape:connector-curvature="0" />
+    <text
+       xml:space="preserve"
+       style="font-size:7.64153147px;line-height:4.77595711px;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:none;stroke:#000000;stroke-width:0.19103828px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="24.536936"
+       y="27.069643"
+       id="text6466"><tspan
+         sodipodi:role="line"
+         id="tspan6464"
+         x="24.536936"
+         y="27.069643"
+         style="fill:#000000;fill-opacity:1;stroke-width:0.19103828px">$A$</tspan></text>
+    <path
+       style="fill:#d5d38b;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.19103828px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 50.419991,22.884297 c 0,0 4.185346,-6.057737 8.701114,-4.736049 4.515766,1.321688 9.141674,-0.220281 8.260549,3.744782 -0.881126,3.965065 -2.753517,7.93013 -0.440563,8.480831 2.312954,0.550704 6.278018,0.440563 4.405628,2.753517 -1.872391,2.312954 -5.727315,6.38816 -9.472097,4.956329 C 58.129839,36.651879 56.147306,33.898363 51.5214,32.686815 46.895491,31.475269 50.419991,22.884297 50.419991,22.884297 Z"
+       id="path6468"
+       inkscape:connector-curvature="0" />
+    <text
+       xml:space="preserve"
+       style="font-size:7.64153147px;line-height:4.77595711px;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:none;stroke:#000000;stroke-width:0.19103828px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="54.605331"
+       y="25.417532"
+       id="text6472"><tspan
+         sodipodi:role="line"
+         id="tspan6470"
+         x="54.605331"
+         y="25.417532"
+         style="fill:#000000;fill-opacity:1;stroke-width:0.19103828px">$B$</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:7.64153147px;line-height:4.77595711px;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.19103828px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="24.977501"
+       y="49.538338"
+       id="text6476"><tspan
+         sodipodi:role="line"
+         id="tspan6474"
+         x="24.977501"
+         y="49.538338"
+         style="fill:#000000;fill-opacity:1;stroke-width:0.19103828px">$(\Omega\propersetminus A)\propersetminus B=(A\disjunion B)^C$</tspan></text>
+  </g>
+</svg>

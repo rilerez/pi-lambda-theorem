@@ -1,7 +1,7 @@
 \documentclass{scrartcl}
 
 \usepackage{riley}
-\usepackage{cfr-lm}
+\usepackage[tt={monowidth=true}]{cfr-lm}
 %\usepackage{riley-libertine}
 \usepackage{graphicx}
 
@@ -9,20 +9,19 @@
 \newcommand{\system}{\mathcal D}
 \newcommand{\propersetminus}{\begin{smallmatrix} \setminus\\\supseteq \end{smallmatrix}}%{\mathop{\setminus}\limits_{\supseteq}}
 \DeclareMathOperator*{\bigdisjunion}{\coprod}
-\newcommand{\disjunion}{\amalg}
+\newcommand{\disjunion}{\mathbin{\amalg}}
 \newcommand{\ordinals}{\texttt{Ord}}
 \newcommand{\inclass}{\in}
 \newcommand{\notinclass}{\notin}
 
-\DeclareMathOperator*{\upunion}{\bigcup\!\!\Uparrow\!}
 \DeclareMathOperator{\successor}{succ}
 
 \usepackage{import}
-\newcommand{\figinput}[1]{\input{#1}}%{\import{figs/}{#1}}
+\newcommand{\figinput}[1]{\import{figs/}{#1}}
 
 \begin{document}
 
-\section{Ordinals and transifite induction}
+\section{Ordinals and transfinite induction}
 \newcommand{\setofords}{\mathcal X}
 \begin{defn}[The ordinals, \(\ordinals\)]
   These are defined inductively:
@@ -61,8 +60,8 @@ Otherwise, \(\alpha\) is a \emph{limit ordinal}.
   For a logical statement \(\phi\), if
   \begin{enumerate}
   \item \(\phi(0)\) holds,
-  \item \(\phi(n)\implies\phi(\successor(n))\) (strictly speaking, this follows
-    from (3) but is usually easier to prove first)
+  \item \(\phi(n)\implies\phi(\successor(n))\) \footnote{strictly speaking, this follows
+    from (1) and  (3) but is usually easier to prove first}
   \item \label{strong induction}If, for all \(n<\alpha\), \(\phi(n)\) is true then \(\phi(\alpha)\) is true:
     \[
       (\forall n<\alpha) \phi(n)\implies \phi(\alpha)
@@ -153,16 +152,19 @@ Allowing arbitrary complements would give a \(\sigma\)-algebra as
 \[
   (\measpace\setminus A)\setminus B = (A\cup B)^C = A^C \cap B^C
 \]
-allowing arbitrary \(\sigma\)--unions and intersections.
+allowing arbitrary \(\sigma\)--unions and intersections. \\
+\figinput{relcomp.pdf_tex}
 
- \figinput{relcomp.pdf_tex}
 
 \begin{theorem}[Alternative definition of \(\lambda\)-system] \label{equivalent dynkin system def}
   Equivalently,
   \begin{itemize}
   \item \(\measpace\in\system\)
   \item Closure under \emph{global} complements: \[A\in \system \implies A^C\in\system\]
-  \item Closure under \emph{disjoint} \(\sigma\)-unions
+  \item Closure under \emph{disjoint} \(\sigma\)-unions:
+    \[
+      \{A_i\in \system\}, A_i\cap A_j=\emptyset \implies \bigdisjunion A_i \in \system
+    \]
   \end{itemize}
 \end{theorem}
 \begin{proof}

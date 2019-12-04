@@ -16,9 +16,9 @@
 
 
 % koma
-\setkomafont{section}{\LARGE\normalfont\sffamily\bfseries\color[gray]{.46}}
-\setkomafont{subsection}{\large\normalfont\sffamily\bfseries\color[gray]{.35}}
-\setkomafont{subsubsection}{\big\normalfont\sffamily\bfseries\color[gray]{.3}}
+\setkomafont{section}{\LARGE\normalfont\sffamily\color[gray]{.3}}
+\setkomafont{subsection}{\large\normalfont\sffamily\color[gray]{.1}}
+\setkomafont{subsubsection}{\big\normalfont\sffamily\color[gray]{.1}}
 
 % theorem stuff
 \newcounter{thms}
@@ -42,6 +42,7 @@
 % }
 % \ProcessOptions\relax
 
+\theorembodyfont{\normalfont}
 \theoremheaderfont{\normalfont\sffamily}
 \newtheorem{defn}[thms]{Definition}
 \newtheorem{defn?}[thms]{Definition attempt}
@@ -50,6 +51,7 @@
 
 \newtheorem{counterex}[thms]{Counter example}
 
+\theorembodyfont{\itshape}
 \newtheorem{theorem}[thms]{Theorem}
 \newtheorem{lemma}[thms]{Lemma}
 \newtheorem{cor}[thms]{Corollary}
@@ -80,14 +82,48 @@
 \newcommand{\eg}{\emph{e.g.\@}}
 
 
+%why doesn't this play nice with align points???
 %variable names
-\newcommand{\norm}[1]{\left\|#1 \right\|}
-\newcommand{\inner}[2]{\left\langle #1, #2 \right\rangle}
+\DeclarePairedDelimiterX\Inner[2]{\langle}{\rangle}{#1,#2}
+\DeclarePairedDelimiter\Norm{\lVert}{\rVert}
+\DeclarePairedDelimiter\Abs{\lvert}{\rvert}
+\DeclarePairedDelimiter\Paren{(}{)}
+
+% just to make sure it exists
+\providecommand\given{}
+% can be useful to refer to this outside \Set
+% \newcommand\SetSymbol[1][]{%
+% \nonscript\:#1\vert
+% \allowbreak
+% \nonscript\:
+% \mathopen{}}
+\newcommand\SetSymbol[1][]{%
+: \allowbreak
+}
+\DeclarePairedDelimiterX\Set[1]{\{}{\}}{%
+\renewcommand\given{\SetSymbol[\delimsize]}
+#1
+}
+
+\usepackage{xparse}
+
+\newcommand{\inner}{\Inner*}
+\newcommand{\norm}{\Norm*}
+\NewDocumentCommand{\abs}{o m}{%
+  \IfNoValueTF{#1}{\Abs*{#2}}{\Abs[#1]{#2}}%
+}
+\NewDocumentCommand{\paren}{o m}{%
+  \IfNoValueTF{#1}{\Paren*{#2}}{\Paren[#1]{#2}}%
+}
+\NewDocumentCommand{\set}{o m}{%
+  \IfNoValueTF{#1}{\Set*{#2}}{\Set[#1]{#2}}%
+}
+
 \providecommand{\blank}{{\Box}}%{\,\rule{1em}{.4pt}\,}
 \providecommand{\Z}{\mathbb{Z}}
 \providecommand{\N}{\mathbb{N}}
 \providecommand{\R}{\mathbb{R}}
-\providecommand{\C}{\mathbb{C}}
+\providecommand{\complex}{\mathbb{C}}
 \providecommand{\Q}{\mathbb{Q}}
 \providecommand{\id}{\mathrm{id}}
 
@@ -125,18 +161,25 @@
 \DeclareMathOperator{\diam}{diam}
 
 \usepackage{bbm}
-\newcommand{\character}{{\mathbbm{1}}}
+\newcommand{\character}[1]{{\mathbbm{1}}_{#1}}
 \usepackage{xfrac}
 \newcommand{\integrable}{\mathcal{L}}
 
 \let\blackprod\prod
 \let\blackcoprod\coprod
 \let\blacksum\sum
-\definecolor{\sum-color}{gray}{0}
+
+\definecolor{sum-color}{gray}{0}
 \definecolor{product-color}{gray}{.25}
+
 \DeclareMathOperator*{\graysum}{{\color{sum-color}\blacksum}}
 \DeclareMathOperator*{\grayprod}{{\color{product-color}\blackprod}}
 \DeclareMathOperator*{\graycoprod}{{\color{product-color}\blackcoprod}}
 \renewcommand{\sum}{\graysum}
 \renewcommand{\prod}{\grayprod}
 \renewcommand{\coprod}{\graycoprod}
+
+\newcommand{\niton}{\not\kern1pt\ni}
+\DeclareMathOperator{\image}{Im}
+
+\DeclareMathOperator*{\upunion}{\mathchoice{\displaystyle\bigcup\!\big\Uparrow\!}{\textstyle\bigcup\!\!\Uparrow\!}{\scriptstyle\bigcup\uparrow}{\scriptscriptstyle\bigcup\uparrow}}
