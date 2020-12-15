@@ -270,42 +270,49 @@ allowing arbitrary \(\sigma\)--unions and intersections. \\
   \]
   for some \(\stopord\inclass\ordinals\).
 
-  We will show by induction that for any \(\alpha\in\ordinals\), the intersection of
+  \newcommand{\nextord}{5}
+  We show for any \(\alpha\in\ordinals\), the intersection of
   any two elements in \(\lambdify^\alpha(\pisystem)\) is in
-  \(\lambdify^{3\alpha}(\pisystem)\).
+  \(\lambdify^{\nextord(\alpha)}(\pisystem)\).
 
   \begin{enumerate}
-  \item This is trivially true for \(\alpha=0\) by the hypothesis that \(\pisystem\) is a \(\pi\)-system.
+  \item As $\nextord(0)\geq 0$, this is true for \(\alpha=0\) by the hypothesis that \(\pisystem\) is a \(\pi\)-system.
   \item Any element in \(\lambdify^{\successor(\alpha)}(\pisystem)\) can be written as
     \(A\), \(A^C\), or \(\bigdisjunion A_i\) with \(A,A_i\in\lambdify^{\alpha}\).
-    Consider writing an intersection of elements in
+    Writing an intersection of elements in
     \(\lambdify^{\successor(\alpha)}\) in terms of proper complements and disjoint
     unions of intersections of elements in \(\Lambda^\alpha(\pisystem)\):
       \begin{align*}
-        &A\cap B^C &&= A\propersetminus \grayoverbrace{(B\cap A)}{\in \lambdify^{3\alpha}(\pisystem)} &&\in \lambdify^{3\alpha+1}(\pisystem) \\
-        &A^C\cap B^C &&= (A\cup B)^C = \left((A\cap B^C)\disjunion B  \right)^C &&\in \lambdify^{3\alpha+3}(\pisystem) \\
+        &A\cap B^C &&= A\propersetminus (B\cap A) = (A^{C} \disjunion \grayoverbrace{(B \cap A)}{\in\lambdify^{\nextord(\alpha)}(\pisystem)})^{C}
+        &&\in \lambdify^{\nextord(\alpha)+3}(\pisystem) \\
+        %
+        &A^C\cap B^C &&= (A\cup B)^C = \left((A\cap B^C)\disjunion B  \right)^C
+        &&\in \lambdify^{\nextord(\alpha)+5}(\pisystem) \\
+        %
         & \left(\bigdisjunion_{i} A_i\right) \cap
         \left(\bigdisjunion_j B_j\right) &&= \bigdisjunion_{i,j}
-        \grayoverbrace{A_i\cap B_j}{\in\lambdify^{3\alpha}(\pisystem)} &&\in
-        \lambdify^{3\alpha+1}(\pisystem) \\
+                                            \grayoverbrace{A_i\cap B_j}{\in\lambdify^{\nextord(\alpha)}(\pisystem)}
+        &&\in
+        \lambdify^{\nextord(\alpha)+1}(\pisystem) \\
+        %
        & A^C \cap \bigdisjunion B_j &&= \bigdisjunion \grayunderbrace{A^C\cap
-           B_j}{\in\lambdify^{3\alpha+1}(\pisystem)} &&\in\lambdify^{3\alpha+2}(\pisystem)
+           B_j}{\in\lambdify^{\nextord(\alpha)+3}(\pisystem)} &&\in\lambdify^{\nextord(\alpha)+4}(\pisystem)
       \end{align*}
-    which are all in \(\lambdify^{3\alpha+3}(\pisystem)=\lambdify^{3\successor(\alpha)}(\pisystem)\).
+          which are all in \(\lambdify^{\nextord(\alpha)+5}(\pisystem)= \lambdify^{\nextord(\alpha+1)}\).
   \item
     If \(\alpha\) is a limit ordinal, then set
     \[
-      3\alpha \geq 3\sup_{\beta <\alpha}\beta = \sup_{\beta <
-        \alpha}3\beta
+      \nextord\alpha \geq \nextord\sup_{\beta <\alpha}\beta = \sup_{\beta <
+        \alpha}\nextord\beta
     \]
     For any two \(A,B\in\lambdify^\alpha\) there must be some \(n_A,n_B<\alpha\)
     such that \(A\in \lambdify^{n_A}(\pisystem)\) and
     \(B\in\lambdify^{n_B}(\pisystem)\). Hence, if \(n=\max(n_A,n_B)\), then
-    \(A\cap B\in \lambdify^{3n}(\pisystem)\subseteq
-    \lambdify^{3\alpha}(\pisystem)\).
+    \(A\cap B\in \lambdify^{\nextord n}(\pisystem)\subseteq
+    \lambdify^{\nextord\alpha}(\pisystem)\).
   \end{enumerate}
   But this process terminates at \(\omega\), hence
-  \(\lambdify^{3\omega}(\pisystem)=\lambdify^\omega(\pisystem)=\lambdagen(\pisystem)\)
-  and \(\lambdagen(\pisystem)\) is closed under intersections.
+  \(\lambdify^{3\omega}(\pisystem)=\lambdify^\omega(\pisystem)=\lambdagen(\pisystem)\);
+  \(\lambdagen(\pisystem)\) is closed under intersections.
 \end{proof}
 \end{document}
